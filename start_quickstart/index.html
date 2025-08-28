@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Start quickstart - 人车模拟</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Start quickstart";
+        var mkdocs_page_input_path = "start_quickstart.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> 人车模拟
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">首页</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">人车模拟</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Start quickstart</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/OpenHUTB/doc/edit/master/docs/start_quickstart.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="_1"><a href="https://carla.readthedocs.io/en/latest/start_quickstart/">快速启动</a></h1>
+<p>本指南演示如何下载并安装 HUTB 的软件包版本。该软件包包含 HUTB 服务器和 HUTB Python 客户端库。</p>
+<ul>
+<li><strong><a href="#before-you-begin">在你开始之前</a></strong>  </li>
+<li><strong><a href="#carla-installation">下载 HUTB 打包版</a></strong></li>
+<li><strong><a href="#import-additional-assets">导入额外资产</a></strong>  </li>
+<li><strong><a href="#install-client-library">安装 Python 客户端库</a></strong></li>
+<li><strong><a href="#running-carla">运行 HUTB</a></strong>  <ul>
+<li><a href="#launch-the-carla-server">启动 HUTB 服务端</a></li>
+<li><a href="#run-a-python-client-example-script">运行 Python 客户端示例</a> </li>
+<li><a href="#command-line-options">命令行选项</a>  </li>
+</ul>
+</li>
+<li><strong><a href="#updating-carla">更新 HUTB</a></strong></li>
+<li><strong><a href="#intranet">湖工商内网访问资源</a></strong></li>
+<li><strong><a href="#follow-up">下一步</a></strong></li>
+</ul>
+<p>HUTB 的打包版本可让您快速上手使用 HUTB 模拟器。如果您希望修改 HUTB 的引擎代码或为 HUTB 创建自定义地图或资源，则应按照适合您操作系统的说明 <a href="../build_carla/">从源代码构建 HUTB</a> 。</p>
+<hr />
+<h2 id="_2">在你开始之前 <span id="before-you-begin"></span></h2>
+<p>安装 Carla 之前应满足以下要求：</p>
+<ul>
+<li><strong>操作系统。</strong> HUTB 是为 Windows <strong>10</strong> 和 <strong>11</strong>、Ubuntu <strong>22.04</strong> 和 <strong>24.04</strong> 构建的。</li>
+<li><strong>足够的 GPU。</strong> 我们建议使用相当于 NVIDIA 2070 或更高版本的专用 GPU，并且至少具有 8Gb 或更大的 VRAM。</li>
+<li><strong>磁盘空间。</strong> HUTB 将使用大约 20 GB 的空间。</li>
+<li><strong>两个 TCP 端口。</strong> 默认端口为 2000 和 2001。确保这些端口未被防火墙或任何其他应用程序阻止。</li>
+<li><strong>Python.</strong> HUTB API 使用 <a href="(https://www.python.org/downloads/)">Python</a> 进行脚本编写。HUTB 在 Linux 上支持 Python 3.7 至 3.12，在 Windows 上支持 Python 3.7 至 3.12。</li>
+<li><strong>Pip.</strong> Python 包管理器版本 20.3 或更高版本。</li>
+</ul>
+<p>检查你的 <strong>PIP</strong> 版本：
+<div class="highlight"><pre><span></span><code>pip3<span class="w"> </span>-V
+</code></pre></div></p>
+<p>如果你需要升级：
+<div class="highlight"><pre><span></span><code><span class="c1"># 对于 Python 3</span>
+pip3<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+</code></pre></div></p>
+<hr />
+<h2 id="carla">Carla 安装 <span id="carla-installation"></span></h2>
+<h3 id="hutb">下载并解压 HUTB 包</h3>
+<p>使用下方提供的链接从网盘下载所需的 HUTB 软件包。我们建议下载最新版本的软件包，目前版本号为 <a href="https://pan.baidu.com/s/1YJc4Gnhp20Og7VhKkrkXcQ?pwd=hutb">2.2</a> 。</p>
+<p>此网盘可能包含多个版本的 HUTB。您可以选择下载包含所有最新修复和功能的 <strong>当前版本</strong> 、<strong>之前的版本</strong> 以及包含所有开发修复和功能的 <strong>夜间版本</strong> （夜间版本可能不稳定，请谨慎使用）。</p>
+<p>该软件包是一个以版本号命名的压缩文件。请下载并解压该压缩包，并将其保存到方便的位置（例如<code>home</code>或<code>Documents</code>目录）。</p>
+<hr />
+<h2 id="_3"><span id="import-additional-assets">导入额外资产</span></h2>
+<p>每个版本都有其自己的附加资产和地图包。此附加包包括地图 <strong>Town06</strong> 、<strong>Town07</strong> 和 <strong>Town10</strong> 。它们单独存储以减少构建的大小，因此只能在安装主包后才能导入它们。</p>
+<p><strong>1.</strong> <a href="../download/">下载</a> 适合您所需版本的 Carla 的软件包。</p>
+<p><strong>2.</strong> 解压包：</p>
+<ul>
+<li>
+<p><strong>在 Linux 上</strong>:</p>
+<ul>
+<li>将包移动到 <em>Import</em> 文件夹并运行以下脚本以提取内容：</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>path/to/carla/root
+
+./ImportAssets.sh
+</code></pre></div>
+<ul>
+<li>
+<p><strong>在 Windows 上</strong>:</p>
+<ul>
+<li>直接将内容提取到根文件夹中。</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="_4">安装客户端库 <span id="install-client-library"></span></h2>
+<p>使用 PIP 从 <a href="https://pypi.org/project/hutb/">PyPi</a> 安装 Python 客户端库以获取正式发布的版本：</p>
+<div class="highlight"><pre><span></span><code>pip3<span class="w"> </span>install<span class="w"> </span>hutb
+</code></pre></div>
+<p>HUTB 软件包的 Python Wheels 也包含在 <code>PythonAPI/carla/dist</code> 中。<strong>如果您使用的是从源代码构建的自定义软件包或 CARLA-latest 软件包，则需要安装软件包中包含的 wheels，而不是 PyPi 中的 wheels</strong>。在此目录中，使用 PIP 安装相关的 wheels：</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>PythonAPI/carla/dist
+pip3<span class="w"> </span>install<span class="w"> </span>carla-0.9.15-cp37m-manylinux_2_27_x86_64.whl<span class="w"> </span><span class="c1"># 对于使用 Python 3.7 的 CARLA v0.9.15</span>
+</code></pre></div>
+<p>Python 客户端示例脚本依赖于一些先决条件包，请使用 <code>PythonAPI/examples</code> 目录中的 PIP 安装这些包：
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>PythonAPI/examples
+pip3<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</code></pre></div></p>
+<hr />
+<h2 id="hutb_1">运行 HUTB <span id="running-carla"></span></h2>
+<h3 id="hutb_2">启动 HUTB 服务端</h3>
+<p>使用包顶层的启动脚本启动 HUTB 服务器：</p>
+<ul>
+<li>Ubuntu 包：</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>path/to/hutb/root
+
+./CarlaUE4.sh
+</code></pre></div>
+<ul>
+<li>Windows 包：</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>path/to/carla/root
+
+CarlaUE4.exe
+</code></pre></div>
+<p>将会打开一个窗口，其中包含默认城市地图的视图。这是 HUTB 服务器的 <strong>观察者</strong> 视图，可用于检查您的模拟情况。要在旁观者视图中飞行，请使用鼠标和 <code>WASD</code> 键，按住鼠标右键即可调整视图方向。</p>
+<p><img alt="spectator_view" src="../img/build_install/town10_spectator_view.png" /></p>
+<h3 id="python">运行 Python 客户端示例脚本</h3>
+<p>现在 Python API 客户端库已安装完毕，HUTB 服务器也已运行，它现在正在运行并等待客户端连接并与世界交互。您可以尝试一些示例脚本来在城市中产生生命并驾驶汽车。导航到 <code>PythonAPI/examples</code> 目录，打开两个命令行终端，然后运行 <code>generate_traffic.py</code> 脚本，再运行 <code>manual_control.py</code>。</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 终端 A </span>
+<span class="nb">cd</span><span class="w"> </span>PythonAPI<span class="se">\e</span>xamples
+python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+python3<span class="w"> </span>generate_traffic.py<span class="w">  </span>
+
+<span class="c1"># 终端 B</span>
+<span class="nb">cd</span><span class="w"> </span>PythonAPI<span class="se">\e</span>xamples
+python3<span class="w"> </span>manual_control.py<span class="w"> </span>
+</code></pre></div>
+<p>此时将打开一个新的 Pygame 窗口，您可以使用键盘上的箭头键控制 HUTB 模拟器中的车辆。编写 HUTB 脚本时，您需要导入 HUTB Python API，连接到服务器（需要先启动服务器），并使用以下代码访问模拟世界对象 <a href="../python_api/#carlaworld"><code>world</code></a> ：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">carla</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">carla</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
+<span class="n">world</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_world</span><span class="p">()</span>
+</code></pre></div>
+<p>还可以在命令行中添加其他参数以用于特殊模式或配置，详情请参阅 <a href="ext_quickstart.md#command-line-options">命令行选项文档</a> 。此外，还有一个辅助 Python 配置脚本可以启动。</p>
+<h3 id="_5">命令行选项 <span id="command-line-options"></span></h3>
+<p>启动 Carla 时有一些可用的配置选项，可以按如下方式使用它们：</p>
+<div class="highlight"><pre><span></span><code>./CarlaUE4.sh<span class="w"> </span>-carla-rpc-port<span class="o">=</span><span class="m">3000</span>
+</code></pre></div>
+<ul>
+<li><code>-carla-rpc-port=N</code> 监听端口 <code>N</code> 上的客户端连接。流媒体端口默认设置为 <code>N+1</code> 。</li>
+<li><code>-carla-streaming-port=N</code> 指定传感器数据流的端口。使用 0 获取随机未使用的端口。第二个端口将自动设置为<code>N+1</code>。</li>
+<li><code>-quality-level={Low,Epic}</code> 更改图形质量级别。 在 <a href="../adv_rendering_options/">渲染选项</a> 中了解更多信息。</li>
+<li><strong><a href="https://docs.unrealengine.com/en-US/Programming/Basics/CommandLineArguments">虚幻引擎 4 命令行参数列表</a>。</strong> 。虚幻引擎提供了很多选项，但并非所有这些选项在 Carla 中都可用。</li>
+</ul>
+<p>该脚本 <a href="https://github.com/carla-simulator/carla/blob/master/PythonAPI/util/config.py"><code>PythonAPI/util/config.py</code></a> 提供了更多配置选项，应在服务器启动时运行：</p>
+<div class="highlight"><pre><span></span><code>./config.py<span class="w"> </span>--no-rendering<span class="w">      </span><span class="c1"># 禁用渲染</span>
+./config.py<span class="w"> </span>--map<span class="w"> </span>Town05<span class="w">        </span><span class="c1"># 改变地图、</span>
+./config.py<span class="w"> </span>--weather<span class="w"> </span>ClearNoon<span class="w"> </span><span class="c1"># 改变天气</span>
+
+./config.py<span class="w"> </span>--help<span class="w"> </span><span class="c1"># 检查所有可获得的配置选项</span>
+</code></pre></div>
+<hr />
+<h2 id="hutb_3">更新 HUTB <span id="updating-carla"></span></h2>
+<p>无法更新 HUTB 的打包版本。当新版本发布时，存储库会更新，您需要删除以前的版本并安装新版本。</p>
+<p>如果您使用 <strong>pip/pip3</strong> 安装了客户端库，则应通过运行以下命令将其卸载：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Python 3</span>
+pip3<span class="w"> </span>uninstall<span class="w"> </span>carla
+
+<span class="c1"># Python 2</span>
+pip<span class="w"> </span>uninstall<span class="w"> </span>carla
+</code></pre></div>
+<hr />
+<h2 id="_6">湖工商内网访问资源 <span id="intranet"></span></h2>
+<p>如果能ping通IP 地址<code>172.21.108.56</code>，则可以访问以下资源。</p>
+<h3 id="_7">人车模拟器的服务器渲染资源</h3>
+<p>可使用<code>config.py</code>来连接远端的代理模拟环境：</p>
+<p><div class="highlight"><pre><span></span><code><span class="n">python</span> <span class="n">config</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">l</span> <span class="o">--</span><span class="n">host</span> <span class="mf">172.21.108.56</span>
+</code></pre></div>
+控制台输出所包含的地图信息表示连接成功，然后可以运行其他示例。</p>
+<h3 id="_8">大模型本地部署</h3>
+<p>可以通过部署好的 <a href="../software/llm/">大模型</a> 来辅助开发。</p>
+<hr />
+<h2 id="_9">跟进 <span id="follow-up"></span></h2>
+<p>现在您应该已经启动并运行了 HUTB 的打包版本。如果您在安装过程中遇到任何困难，请随时在 <a href="https://github.com/OpenHUTB/hutb/discussions">OpenHUTB 论坛</a> 或 <a href="https://discord.gg/8kqACuC">Discord</a> 频道中发帖。</p>
+<p>下一步是详细了解 HUTB 的核心概念。阅读 <strong>“第一步”</strong> 部分开始学习。您还可以在 Python API 参考中找到有关 Python API 类和方法的所有信息。</p>
+<div class="build-buttons">
+<p>
+<a href="../core_concepts" target="_blank" class="btn btn-neutral" title="Go to first steps">
+前往：第一步</a>
+</p>
+</div>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>OpenHUTB 版权所有 &copy; 2025</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/OpenHUTB/doc" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script src="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sequence-diagrams/1.0.6/sequence-diagram-min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script>
+      <script src="../js/umlconvert.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
