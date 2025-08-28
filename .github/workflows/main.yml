@@ -15,7 +15,7 @@ jobs:
         uses: OpenHUTB/actions-mkdocs@v2
         with:
           mkdocs_version: 'latest' # option
-          requirements: 'requirements.txt' # option
+          requirements: 'requirements.txt'
           configfile: 'mkdocs.yml' # option
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
