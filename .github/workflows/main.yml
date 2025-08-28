@@ -15,7 +15,6 @@ jobs:
         uses: OpenHUTB/actions-mkdocs@v2
         with:
           mkdocs_version: 'latest' # option
-          # 安装行内公式渲染的依赖(python-markdown-math)
           requirements: 'requirements.txt' # option
           configfile: 'mkdocs.yml' # option
       - name: Deploy
