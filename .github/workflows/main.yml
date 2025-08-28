@@ -16,7 +16,7 @@ jobs:
         with:
           mkdocs_version: 'latest'
           requirements: 'requirements.txt'
-          configfile: 'mkdocs.yml' # option
+          configfile: 'mkdocs.yml'
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
